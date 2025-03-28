@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Search, Home, Building, Key } from 'lucide-react';
+import { Search, Home, Building } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -23,14 +23,9 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <Link to="/buy">
+            <Link to="/properties">
               <Button size="lg" className="w-full sm:w-auto">
                 <Home className="mr-2 h-5 w-5" /> Buy
-              </Button>
-            </Link>
-            <Link to="/rent">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-blue-800">
-                <Key className="mr-2 h-5 w-5" /> Rent
               </Button>
             </Link>
             <Link to="/list-property">
