@@ -1,112 +1,80 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Card, CardContent } from "@/components/ui/card";
+import { Bed, Bath, Maximize, MapPin, Home } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
-import { Heart, MapPin, Bed, Bath, Square } from 'lucide-react';
 
-export interface PropertyProps {
-  id: string;
+interface PropertyCardProps {
   title: string;
-  price: number;
-  priceType: 'sale' | 'rent';
-  type: 'house' | 'apartment' | 'condo' | 'land';
   location: string;
-  bedrooms?: number;
-  bathrooms?: number;
-  area?: number;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+  area: number;
   image: string;
+  type: string;
   featured?: boolean;
 }
 
-const PropertyCard: React.FC<PropertyProps> = ({
-  id,
+const PropertyCard = ({
   title,
-  price,
-  priceType,
-  type,
   location,
+  price,
   bedrooms,
   bathrooms,
   area,
   image,
-  featured
-}) => {
+  type,
+  featured = false
+}: PropertyCardProps) => {
   return (
-    <Link to={`/property/${id}`}>
-      <Card className="property-card h-full overflow-hidden">
+    <Link to={`/property/1`} className="block">
+      <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 property-card">
         <div className="relative">
-          <AspectRatio ratio={4/3}>
-            <img 
-              src={image} 
-              alt={title} 
-              className="object-cover w-full h-full rounded-t-lg"
-            />
-          </AspectRatio>
-          <div className="absolute top-3 right-3">
-            <button 
-              className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                // Add to favorites logic here
-              }}
-            >
-              <Heart className="h-5 w-5 text-gray-600 hover:text-red-500" />
-            </button>
-          </div>
-          <div className="absolute top-3 left-3 flex gap-2">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute top-3 left-3">
+            <Badge className="bg-nexthome-blue text-white">{type}</Badge>
             {featured && (
-              <Badge className="bg-nexthome-blue hover:bg-nexthome-blue/90">
-                Featured
-              </Badge>
+              <Badge className="ml-2 bg-nexthome-green text-white">Featured</Badge>
             )}
-            <Badge variant="outline" className="bg-white border-white text-gray-800 hover:bg-gray-100">
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </Badge>
-            <Badge className="bg-nexthome-green hover:bg-nexthome-green/90">
-              For {priceType === 'sale' ? 'Sale' : 'Rent'}
+          </div>
+          <div className="absolute bottom-3 right-3">
+            <Badge className="bg-white text-nexthome-blue font-bold">
+              ${price.toLocaleString()}
             </Badge>
           </div>
         </div>
-        <CardContent className="p-5">
-          <h3 className="font-bold text-lg mb-1 line-clamp-1">{title}</h3>
-          <div className="flex items-center text-gray-500 mb-3">
+        
+        <div className="p-4">
+          <h3 className="text-lg font-semibold mb-2 line-clamp-1">{title}</h3>
+          
+          <div className="flex items-center text-gray-600 mb-3">
             <MapPin className="h-4 w-4 mr-1" />
-            <span className="text-sm line-clamp-1">{location}</span>
+            <span className="text-sm">{location}</span>
           </div>
           
-          <div className="flex justify-between items-center mb-3">
-            <h4 className="font-bold text-nexthome-blue text-xl">
-              ${price.toLocaleString()}
-              {priceType === 'rent' && <span className="text-sm font-normal text-gray-500">/month</span>}
-            </h4>
-          </div>
-          
-          {(bedrooms || bathrooms || area) && (
-            <div className="flex items-center text-gray-500 gap-4 text-sm">
-              {bedrooms !== undefined && (
-                <div className="flex items-center">
-                  <Bed className="h-4 w-4 mr-1" />
-                  <span>{bedrooms} {bedrooms === 1 ? 'Bed' : 'Beds'}</span>
-                </div>
-              )}
-              {bathrooms !== undefined && (
-                <div className="flex items-center">
-                  <Bath className="h-4 w-4 mr-1" />
-                  <span>{bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}</span>
-                </div>
-              )}
-              {area !== undefined && (
-                <div className="flex items-center">
-                  <Square className="h-4 w-4 mr-1" />
-                  <span>{area} sq ft</span>
-                </div>
-              )}
+          <div className="border-t pt-3 mt-3">
+            <div className="flex justify-between text-sm">
+              <div className="flex items-center">
+                <Bed className="h-4 w-4 mr-1 text-nexthome-blue" />
+                <span>{bedrooms} {bedrooms === 1 ? 'Bed' : 'Beds'}</span>
+              </div>
+              <div className="flex items-center">
+                <Bath className="h-4 w-4 mr-1 text-nexthome-blue" />
+                <span>{bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}</span>
+              </div>
+              <div className="flex items-center">
+                <Maximize className="h-4 w-4 mr-1 text-nexthome-blue" />
+                <span>{area} sq ft</span>
+              </div>
             </div>
-          )}
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      </div>
     </Link>
   );
 };
