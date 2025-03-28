@@ -62,6 +62,7 @@ const FeaturedProperties = () => {
           {featuredProperties.map((property) => (
             <PropertyCard
               key={property.id}
+              id={property.id}
               title={property.title}
               location={property.location}
               price={property.price}
@@ -70,6 +71,7 @@ const FeaturedProperties = () => {
               area={property.area}
               image={property.image}
               type={property.type}
+              featured={property.featured}
             />
           ))}
         </div>

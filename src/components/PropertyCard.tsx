@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bed, Bath, Maximize, MapPin, Home } from 'lucide-react';
+import { Bed, Bath, Maximize, MapPin } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 
 interface PropertyCardProps {
+  id: number;
   title: string;
   location: string;
   price: number;
@@ -17,6 +18,7 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({
+  id,
   title,
   location,
   price,
@@ -28,7 +30,7 @@ const PropertyCard = ({
   featured = false
 }: PropertyCardProps) => {
   return (
-    <Link to={`/property/1`} className="block">
+    <Link to={`/property/${id}`} className="block">
       <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 property-card">
         <div className="relative">
           <img 
