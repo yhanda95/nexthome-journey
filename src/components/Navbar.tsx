@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -37,11 +36,8 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-nexthome-blue font-medium">
               Home
             </Link>
-            <Link to="/buy" className="text-gray-700 hover:text-nexthome-blue font-medium">
+            <Link to="/properties" className="text-gray-700 hover:text-nexthome-blue font-medium">
               Buy
-            </Link>
-            <Link to="/rent" className="text-gray-700 hover:text-nexthome-blue font-medium">
-              Rent
             </Link>
             <Link to="/search" className="text-gray-700 hover:text-nexthome-blue font-medium">
               Search
@@ -114,18 +110,11 @@ const Navbar = () => {
                 Home
               </Link>
               <Link 
-                to="/buy" 
+                to="/properties" 
                 className="text-gray-700 hover:text-nexthome-blue font-medium"
                 onClick={toggleMenu}
               >
                 Buy
-              </Link>
-              <Link 
-                to="/rent" 
-                className="text-gray-700 hover:text-nexthome-blue font-medium"
-                onClick={toggleMenu}
-              >
-                Rent
               </Link>
               <Link 
                 to="/search" 
